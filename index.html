@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cdmaestas — HPC &amp; storage tooling</title>
+<meta name="description" content="Open-source tooling for HPC clusters and IBM Storage Scale: benchmarking, cluster administration, network readiness, and install automation.">
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --panel: #ffffff;
+    --text: #1c1b19;
+    --muted: #63615c;
+    --line: #e3e1dc;
+    --accent: #b4541e;
+    --tag-bg: #f1efe9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16171a;
+      --panel: #1d1f23;
+      --text: #eceae5;
+      --muted: #9b978f;
+      --line: #2c2f34;
+      --accent: #e08b52;
+      --tag-bg: #262a2f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 60rem; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+
+  header { border-bottom: 1px solid var(--line); padding-bottom: 2.5rem; margin-bottom: 3rem; }
+  h1 { font-size: 2rem; margin: 0 0 .35rem; letter-spacing: -.02em; }
+  .role { color: var(--accent); font-weight: 600; font-size: .95rem; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 1.1rem; }
+  .lede { color: var(--muted); max-width: 42rem; margin: 0 0 1.5rem; font-size: 1.05rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: .92rem; }
+  .links a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+  .links a:hover { color: var(--accent); border-color: var(--accent); }
+
+  h2 { font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; margin: 3rem 0 1.25rem; }
+  h2:first-of-type { margin-top: 0; }
+
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.25rem 1.35rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card h3 { margin: 0 0 .5rem; font-size: 1.05rem; }
+  .card h3 a { color: var(--text); text-decoration: none; }
+  .card h3 a:hover { color: var(--accent); }
+  .card p { margin: 0 0 1rem; color: var(--muted); font-size: .93rem; flex: 1; }
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .tag {
+    font-size: .74rem; letter-spacing: .03em; color: var(--muted);
+    background: var(--tag-bg); border-radius: 999px; padding: .2rem .6rem;
+  }
+
+  footer { margin-top: 4rem; padding-top: 1.75rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Chris Maestas</h1>
+    <div class="role">CTO, Data &amp; AI Storage Solutions — IBM</div>
+    <p class="lede">
+      25+ years architecting enterprise IT systems across federal, commercial, and public sectors.
+      My work centers on HPC, hybrid, and AI infrastructure — and on unstructured data at scale:
+      file, object, and tape storage spanning cloud, on-premises, and edge, on bare metal,
+      virtualized, and containerized platforms.
+    </p>
+    <p class="lede">
+      The projects below are personal open-source work: benchmarking harnesses, cluster
+      administration frameworks, network validation, and install automation for large Linux
+      clusters and IBM Storage Scale.
+    </p>
+    <nav class="links">
+      <a href="https://github.com/cdmaestas">GitHub</a>
+      <a href="https://www.linkedin.com/in/chieftroublemakingofficer">LinkedIn</a>
+      <a href="mailto:cdmaestas@gmail.com">Email</a>
+    </nav>
+  </header>
+
+  <h2>Cluster tooling</h2>
+  <div class="grid">
+
+    <article class="card">
+      <h3><a href="https://github.com/cdmaestas/cbench">Cbench</a></h3>
+      <p>
+        Scalable cluster benchmarking and testing toolkit. Automates the full lifecycle of HPC
+        benchmarking — generating job scripts, submitting them to the batch scheduler, and parsing
+        output into structured results across 31 benchmarks. Originally from Sandia National
+        Laboratories; v2 adds a modern Python toolchain alongside the original Perl.
+      </p>
+      <div class="tags"><span class="tag">Perl</span><span class="tag">Python</span><span class="tag">Benchmarking</span></div>
+    </article>
+
+    <article class="card">
+      <h3><a href="https://github.com/cdmaestas/cap">CAP — Cluster Administration Package</a></h3>
+      <p>
+        A framework that integrates, configures, and manages HPC clusters by bundling common
+        cluster tools — pdsh, genders, Slurm, munge, conman, freeipmi, powerman — behind a
+        unified build and install system with RPM and Debian packaging.
+      </p>
+      <div class="tags"><span class="tag">Shell</span><span class="tag">Packaging</span><span class="tag">Cluster ops</span></div>
+    </article>
+
+  </div>
+
+  <h2>IBM Storage Scale</h2>
+  <div class="grid">
+
+    <article class="card">
+      <h3><a href="https://github.com/cdmaestas/Scale-GUInstall">Scale GUInstall</a></h3>
+      <p>
+        A single-file web frontend for the IBM Storage Scale Installation Toolkit. Gives a guided,
+        form-driven interface for installing, deploying, and upgrading Scale clusters, with a
+        command preview before anything runs. Ships as signed RPM and DEB packages.
+      </p>
+      <div class="tags"><span class="tag">HTML</span><span class="tag">Flask</span><span class="tag">Installer</span></div>
+    </article>
+
+    <article class="card">
+      <h3><a href="https://github.com/cdmaestas/StorageScale_NETWORK_READINESS">Network Readiness (KOET)</a></h3>
+      <p>
+        Development fork of the IBM Storage Scale network readiness tool. Validates cluster
+        interconnect health — latency, throughput, and packet loss — before a Scale deployment
+        goes anywhere near production.
+      </p>
+      <div class="tags"><span class="tag">C</span><span class="tag">Networking</span><span class="tag">Validation</span></div>
+    </article>
+
+    <article class="card">
+      <h3><a href="https://github.com/cdmaestas/ibm-storage-scale-mcp-server">Storage Scale MCP Server</a></h3>
+      <p>
+        An MCP server built on the IBM Storage Scale REST APIs and CLIs, letting LLMs query and
+        interact with a live Scale cluster through a structured tool interface.
+      </p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Fork</span></div>
+    </article>
+
+    <article class="card">
+      <h3><a href="https://github.com/cdmaestas/ess_comprestimator">ESS Comprestimator</a></h3>
+      <p>
+        IBM Storage Scale System compression estimator — samples existing data to project how much
+        capacity compression would actually reclaim before you commit to enabling it.
+      </p>
+      <div class="tags"><span class="tag">TypeScript</span><span class="tag">Capacity</span><span class="tag">Fork</span></div>
+    </article>
+
+  </div>
+
+  <footer>
+    Built with GitHub Pages. Source at
+    <a href="https://github.com/cdmaestas/cdmaestas.github.io">cdmaestas/cdmaestas.github.io</a>.
+    The projects and views here are my own. They are not IBM products or services, and are
+    neither endorsed nor supported by IBM.
+  </footer>
+
+</div>
+</body>
+</html>
