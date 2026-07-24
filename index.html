@@ -68,6 +68,14 @@
     background: var(--tag-bg); border-radius: 999px; padding: .2rem .6rem;
   }
 
+  .pubs { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); margin-bottom: .5rem; }
+  .pubs h3 { font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; margin: 0 0 .9rem; }
+  .pubs ul { list-style: none; margin: 0; padding: 0; }
+  .pubs li { margin: 0 0 .8rem; font-size: .92rem; line-height: 1.45; }
+  .pubs a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .pubs a:hover { color: var(--accent); border-color: var(--accent); }
+  .pubs .meta { display: block; color: var(--muted); font-size: .8rem; margin-top: .1rem; }
+
   footer { margin-top: 4rem; padding-top: 1.75rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
   footer a { color: var(--muted); }
 </style>
@@ -94,6 +102,55 @@
       <a href="https://www.linkedin.com/in/chieftroublemakingofficer">LinkedIn</a>
     </nav>
   </header>
+
+  <h2>Selected publications &amp; talks</h2>
+  <div class="pubs">
+
+    <div>
+      <h3>IBM Redbooks</h3>
+      <ul>
+        <li>
+          <a href="https://www.redbooks.ibm.com/abstracts/sg248602.html">IBM Storage Scale: Working with Abstract Data</a>
+          <span class="meta">SG24-8602 · 2026</span>
+        </li>
+        <li>
+          <a href="https://www.redbooks.ibm.com/abstracts/redp5746.html">IBM Storage Scale System 6000 with NVIDIA DGX SuperPOD Deployment Guide</a>
+          <span class="meta">REDP-5746 · 2026</span>
+        </li>
+        <li>
+          <a href="https://www.redbooks.ibm.com/abstracts/redp5729.html">IBM Storage Scale System Introduction Guide</a>
+          <span class="meta">REDP-5729 · 2026</span>
+        </li>
+        <li>
+          <a href="https://www.redbooks.ibm.com/abstracts/redp5721.html">IBM Storage Ceph Concepts and Architecture Guide</a>
+          <span class="meta">REDP-5721 · 2024</span>
+        </li>
+        <li>
+          <a href="https://www.redbooks.ibm.com/abstracts/redp4873.html">IBM Private, Public, and Hybrid Cloud Storage Solutions</a>
+          <span class="meta">REDP-4873 · 2018</span>
+        </li>
+        <li>
+          <a href="https://www.redbooks.ibm.com/abstracts/redp5121.html">IBM Software-Defined Storage Guide</a>
+          <span class="meta">REDP-5121 · 2018</span>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Talks &amp; media</h3>
+      <ul>
+        <li>
+          <a href="https://www.youtube.com/watch?v=uuhtsoZyB3w">Revamping Data Storage to Harness AI</a>
+          <span class="meta">theCUBE · IBM Storage Summit · 2023</span>
+        </li>
+        <li>
+          <a href="https://techfieldday.com/video/ibm-storage-scale-for-data-and-ai-solutions-and-demonstration/">IBM Storage Scale for Data and AI: Solutions &amp; Demonstration</a>
+          <span class="meta">Storage Field Day 25 · 2023</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
 
   <h2>Cluster tooling</h2>
   <div class="grid">
