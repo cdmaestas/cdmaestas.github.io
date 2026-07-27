@@ -3,8 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>cdmaestas — HPC &amp; storage tooling</title>
-<meta name="description" content="Open-source tooling for HPC clusters and IBM Storage Scale: benchmarking, cluster administration, network readiness, and install automation.">
+<title>Chris Maestas — HPC, AI &amp; data infrastructure</title>
+<meta name="description" content="Chris Maestas designs data infrastructure for HPC and AI and builds open-source tooling for benchmarking, cluster operations, and IBM Storage Scale.">
+<meta name="theme-color" content="#16171a">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cdmaestas.github.io/">
+<meta property="og:title" content="Chris Maestas — HPC, AI &amp; data infrastructure">
+<meta property="og:description" content="Data infrastructure for HPC and AI, from edge clusters to global-scale storage systems.">
+<meta property="og:image" content="https://cdmaestas.github.io/social-card.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chris Maestas — HPC, AI &amp; data infrastructure">
+<meta name="twitter:description" content="Data infrastructure for HPC and AI, from edge clusters to global-scale storage systems.">
+<meta name="twitter:image" content="https://cdmaestas.github.io/social-card.svg">
+<link rel="canonical" href="https://cdmaestas.github.io/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Chris Maestas",
+  "jobTitle": "CTO, Data & AI Storage Solutions",
+  "worksFor": {"@type": "Organization", "name": "IBM"},
+  "url": "https://cdmaestas.github.io/",
+  "sameAs": [
+    "https://github.com/cdmaestas",
+    "https://www.linkedin.com/in/chieftroublemakingofficer"
+  ],
+  "knowsAbout": ["High-performance computing", "AI infrastructure", "IBM Storage Scale", "Unstructured data", "Cluster administration"]
+}
+</script>
 <style>
   :root {
     --bg: #fbfbfa;
@@ -12,21 +39,26 @@
     --text: #1c1b19;
     --muted: #63615c;
     --line: #e3e1dc;
-    --accent: #b4541e;
+    --accent: #a74616;
+    --accent-soft: #f6e9e0;
     --tag-bg: #f1efe9;
+    --shadow: 0 18px 45px rgba(38, 30, 24, .07);
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #16171a;
       --panel: #1d1f23;
       --text: #eceae5;
-      --muted: #9b978f;
-      --line: #2c2f34;
-      --accent: #e08b52;
+      --muted: #aaa69e;
+      --line: #30333a;
+      --accent: #ed9860;
+      --accent-soft: #34261e;
       --tag-bg: #262a2f;
+      --shadow: 0 20px 50px rgba(0, 0, 0, .18);
     }
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
@@ -34,243 +66,253 @@
     font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 60rem; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
-
-  header { border-bottom: 1px solid var(--line); padding-bottom: 2.5rem; margin-bottom: 3rem; }
-  h1 { font-size: 2rem; margin: 0 0 .35rem; letter-spacing: -.02em; }
-  .role { color: var(--accent); font-weight: 600; font-size: .95rem; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 1.1rem; }
-  .lede { color: var(--muted); max-width: 42rem; margin: 0 0 1.5rem; font-size: 1.05rem; }
-  .links { display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: .92rem; }
-  .links a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
-  .links a:hover { color: var(--accent); border-color: var(--accent); }
-
-  h2 { font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; margin: 3rem 0 1.25rem; }
-  h2:first-of-type { margin-top: 0; }
-
-  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+  a { text-underline-offset: .2em; }
+  a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+  .skip-link {
+    position: fixed; top: .75rem; left: .75rem; z-index: 10;
+    padding: .65rem .9rem; background: var(--text); color: var(--bg);
+    transform: translateY(-180%); transition: transform .15s ease;
+  }
+  .skip-link:focus { transform: translateY(0); }
+  .wrap { width: min(100% - 3rem, 64rem); margin: 0 auto; padding: 2rem 0 5rem; }
+  .site-nav {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding-bottom: 2rem; font-size: .86rem;
+  }
+  .monogram {
+    color: var(--accent); font-weight: 800; letter-spacing: .08em;
+    text-decoration: none; border: 1px solid var(--line); border-radius: 6px; padding: .25rem .5rem;
+  }
+  .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 1.25rem; }
+  .nav-links a { color: var(--muted); text-decoration: none; }
+  .nav-links a:hover { color: var(--accent); }
+  .hero { border-bottom: 1px solid var(--line); padding: 3.5rem 0 4.5rem; }
+  .eyebrow, .section-label {
+    color: var(--accent); font-size: .8rem; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+  h1 {
+    max-width: 53rem; margin: .7rem 0 1.15rem; font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.04; letter-spacing: -.05em; font-weight: 750;
+  }
+  .intro { max-width: 43rem; margin: 0 0 1.6rem; color: var(--muted); font-size: 1.08rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .button {
+    display: inline-flex; align-items: center; gap: .45rem; padding: .65rem .9rem;
+    border: 1px solid var(--line); border-radius: 6px; color: var(--text);
+    text-decoration: none; font-weight: 650; font-size: .9rem;
+  }
+  .button.primary { background: var(--accent); border-color: var(--accent); color: #17120f; }
+  @media (prefers-color-scheme: light) { .button.primary { color: #fff; } }
+  .button:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .section { padding-top: 5rem; scroll-margin-top: 1rem; }
+  .section-heading {
+    display: grid; grid-template-columns: 1fr minmax(15rem, 31rem); gap: 2rem;
+    align-items: end; margin-bottom: 2rem;
+  }
+  h2 { margin: .35rem 0 0; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.12; letter-spacing: -.035em; }
+  .section-copy { color: var(--muted); margin: 0; }
+  .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .featured-card {
+    position: relative; min-height: 20rem; display: flex; flex-direction: column;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 1.45rem; box-shadow: var(--shadow); transition: border-color .15s ease, transform .15s ease;
+  }
+  .featured-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .featured-card .number { color: var(--accent); font: 700 .75rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .featured-card h3 { margin: 2.3rem 0 .6rem; font-size: 1.35rem; line-height: 1.25; }
+  .featured-card h3 a { color: var(--text); text-decoration: none; }
+  .featured-card h3 a::after { content: ""; position: absolute; inset: 0; }
+  .featured-card p { color: var(--muted); margin: 0 0 1.25rem; font-size: .94rem; flex: 1; }
+  .metric { color: var(--text); font-weight: 650; font-size: .88rem; }
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
   .card {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 1.25rem 1.35rem 1.35rem;
-    display: flex;
-    flex-direction: column;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 1.25rem 1.35rem 1.35rem; display: flex; flex-direction: column;
     transition: border-color .15s ease, transform .15s ease;
   }
   .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .card h3 { margin: 0 0 .5rem; font-size: 1.05rem; }
+  .card h3 { margin: 0 0 .5rem; font-size: 1.05rem; line-height: 1.35; }
   .card h3 a { color: var(--text); text-decoration: none; }
   .card h3 a:hover { color: var(--accent); }
-  .card p { margin: 0 0 1rem; color: var(--muted); font-size: .93rem; flex: 1; }
+  .card p { margin: 0 0 1rem; color: var(--muted); font-size: .91rem; flex: 1; }
   .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
-  .tag {
-    font-size: .74rem; letter-spacing: .03em; color: var(--muted);
-    background: var(--tag-bg); border-radius: 999px; padding: .2rem .6rem;
-  }
-
-  .pubs { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); margin-bottom: .5rem; }
-  .pubs h3 { font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; margin: 0 0 .9rem; }
+  .tag { font-size: .72rem; letter-spacing: .03em; color: var(--muted); background: var(--tag-bg); border-radius: 999px; padding: .2rem .6rem; }
+  .pubs { display: grid; gap: 2rem; grid-template-columns: repeat(3, 1fr); }
+  .pub-group { border-top: 1px solid var(--line); padding-top: 1.25rem; }
+  .pubs h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .09em; color: var(--text); margin: 0 0 1.2rem; }
   .pubs ul { list-style: none; margin: 0; padding: 0; }
-  .pubs li { margin: 0 0 .8rem; font-size: .92rem; line-height: 1.45; }
-  .pubs a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
-  .pubs a:hover { color: var(--accent); border-color: var(--accent); }
-  .pubs .meta { display: block; color: var(--muted); font-size: .8rem; margin-top: .1rem; }
-
-  footer { margin-top: 4rem; padding-top: 1.75rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+  .pubs li { margin: 0 0 1rem; font-size: .91rem; line-height: 1.45; }
+  .pubs a { color: var(--text); text-decoration-color: var(--line); }
+  .pubs a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+  .meta { display: block; color: var(--muted); font-size: .78rem; margin-top: .14rem; }
+  .about {
+    display: grid; grid-template-columns: minmax(12rem, .6fr) 1fr; gap: 3rem;
+    padding: 2rem; border: 1px solid var(--line); border-radius: 12px; background: var(--panel);
+  }
+  .about h2 { margin: 0; }
+  .about p { color: var(--muted); margin: 0 0 1rem; }
+  footer { margin-top: 5rem; padding-top: 1.75rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
   footer a { color: var(--muted); }
+  @media (max-width: 760px) {
+    .wrap { width: min(100% - 2rem, 64rem); padding-top: 1.25rem; }
+    .site-nav { align-items: flex-start; }
+    .nav-links { gap: .75rem; }
+    .nav-links a:nth-child(3) { display: none; }
+    .hero { padding: 2.75rem 0 3.5rem; }
+    h1 { font-size: clamp(2.45rem, 13vw, 4rem); }
+    .section { padding-top: 4rem; }
+    .section-heading, .about { grid-template-columns: 1fr; gap: 1rem; }
+    .featured-grid, .grid, .pubs { grid-template-columns: 1fr; }
+    .featured-card { min-height: 0; }
+    .featured-card h3 { margin-top: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .01ms !important; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#content">Skip to content</a>
 <div class="wrap">
-
-  <header>
-    <h1>Chris Maestas</h1>
-    <div class="role">CTO, Data &amp; AI Storage Solutions — IBM</div>
-    <p class="lede">
-      25+ years architecting enterprise IT systems across federal, commercial, and public sectors.
-      My work centers on HPC, hybrid, and AI infrastructure — and on unstructured data at scale:
-      file, object, and tape storage spanning cloud, on-premises, and edge, on bare metal,
-      virtualized, and containerized platforms.
-    </p>
-    <p class="lede">
-      The projects below are personal open-source work: benchmarking harnesses, cluster
-      administration frameworks, network validation, and install automation for large Linux
-      clusters and IBM Storage Scale.
-    </p>
-    <nav class="links">
-      <a href="https://github.com/cdmaestas">GitHub</a>
-      <a href="https://www.linkedin.com/in/chieftroublemakingofficer">LinkedIn</a>
-    </nav>
-  </header>
-
-  <h2>Publications, talks &amp; writing</h2>
-  <div class="pubs">
-
-    <div>
-      <h3>Selected Recent Redbooks</h3>
-      <ul>
-        <li>
-          <a href="https://www.redbooks.ibm.com/abstracts/sg248602.html?Open">IBM Storage Scale: Working with Abstract Data</a>
-          <span class="meta">IBM Redbooks · SG24-8602 · 2026</span>
-        </li>
-        <li>
-          <a href="https://www.redbooks.ibm.com/abstracts/redp5746.html?Open">IBM Storage Scale System 6000 with NVIDIA DGX SuperPOD Deployment Guide</a>
-          <span class="meta">IBM Redbooks · REDP-5746 · 2026</span>
-        </li>
-        <li>
-          <a href="https://www.redbooks.ibm.com/abstracts/redp5729.html?Open">IBM Storage Scale System Introduction Guide</a>
-          <span class="meta">IBM Redbooks · REDP-5729 · 2026</span>
-        </li>
-        <li>
-          <a href="https://www.redbooks.ibm.com/abstracts/redp5721.html?Open">IBM Storage Ceph Concepts and Architecture Guide</a>
-          <span class="meta">IBM Redbooks · REDP-5721 · 2024</span>
-        </li>
-        <li>
-          <a href="https://www.redbooks.ibm.com/abstracts/redp4873.html?Open">IBM Private, Public, and Hybrid Cloud Storage Solutions</a>
-          and <a href="https://www.redbooks.ibm.com/abstracts/redp5121.html?Open">IBM Software-Defined Storage Guide</a>
-          <span class="meta">IBM Redbooks · REDP-4873, REDP-5121 · 2018</span>
-        </li>
-      </ul>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a class="monogram" href="#" aria-label="Chris Maestas, home">CM</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#publications">Publications</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/cdmaestas">GitHub ↗</a>
     </div>
+  </nav>
 
-    <div>
-      <h3>Talks &amp; media</h3>
-      <ul>
-        <li>
-          <a href="https://mediacenter.ibm.com/channel/IBM+Redbooks/194592493">IBM Storage Scale: Working with Abstract Data</a>
-          <span class="meta">Author Session · IBM MediaCenter · 2026</span>
-        </li>
-        <li>
-          IBM Storage Scale System 6000 with NVIDIA DGX SuperPOD
-          <span class="meta">2026 · video link to confirm</span>
-        </li>
-        <li>
-          <a href="https://www.youtube.com/watch?v=0W-NHF5d9tQ">IBM Fusion Deep Archive and Tape Robotics for HPC and AI</a>
-          <span class="meta">SC25 · 2025</span>
-        </li>
-        <li>
-          <a href="https://jeskell.com/optimize-your-data-lifecycle-join-our-digital-talk-series-with-ibm-storage-scale-tape/">Optimize Your Data Lifecycle</a>
-          <span class="meta">Jeskell digital talk series · 2025</span>
-        </li>
-        <li>
-          <a href="https://www.youtube.com/watch?v=4s8Lq1UuKPo">Roundtable: High Performance Storage</a>
-          <span class="meta">with Patano, Atzkern, Coomer · 2024</span>
-        </li>
-        <li>
-          <a href="https://siliconangle.com/2023/07/27/revamping-data-storage-to-harness-ai-for-an-information-supply-chain-ibmstoragesummit/">Revamping Data Storage to Harness AI</a>
-          <span class="meta">theCUBE · IBM Storage Summit · 2023</span>
-        </li>
-        <li>
-          IBM Storage Scale — A Global Data Platform
-          <span class="meta">Tech Field Day · 2023 · video link to confirm</span>
-        </li>
-        <li>
-          <a href="https://mediacenter.ibm.com/media/IBM+TechU+2021+virtual+edition+-+IBM+Storage+portfolio+can+address+Data+and+AI+with+Chris+Maestas/1_m77bd1yb">IBM TechU 2021: IBM Storage Portfolio for Data and AI</a>
-          <span class="meta">2021</span>
-        </li>
-        <li>
-          <a href="https://www.spectrumscaleug.org/presentations/">Spectrum Scale User Group (SSUG) presenter</a>
-          <span class="meta">various sessions · 2018–2025</span>
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <h3>Blog posts</h3>
-      <ul>
-        <li>
-          <a href="https://community.ibm.com/community/user/blogs/christopher-maestas/2026/05/30/cas-for-scale-system-6000">CAS for Scale System 6000</a>
-          <span class="meta">IBM Community · 2026</span>
-        </li>
-        <li>
-          <a href="https://community.ibm.com/community/user/blogs/christopher-maestas/2026/02/06/hpc-ai-and-culture-my-trip-to-scahpc-asia-2026">HPC, AI and Culture: My Trip to SCAHPC Asia 2026</a>
-          <span class="meta">IBM Community · 2026</span>
-        </li>
-        <li>
-          <a href="https://es.linkedin.com/posts/copernicuslacchile_ayer-recibimos-en-copernicuslac-chile-a-christopher-activity-7435316350891384833-QA1R">Visit to Copernicus LAC Chile</a>
-          <span class="meta">LinkedIn · 2026</span>
-        </li>
-      </ul>
-    </div>
-
-  </div>
-
-  <h2>Cluster tooling</h2>
-  <div class="grid">
-
-    <article class="card">
-      <h3><a href="https://github.com/cdmaestas/cbench">Cbench</a></h3>
-      <p>
-        Scalable cluster benchmarking and testing toolkit. Automates the full lifecycle of HPC
-        benchmarking — generating job scripts, submitting them to the batch scheduler, and parsing
-        output into structured results across 31 benchmarks. Originally from Sandia National
-        Laboratories; v2 adds a modern Python toolchain alongside the original Perl.
+  <main id="content">
+    <header class="hero">
+      <div class="eyebrow">Chris Maestas · CTO, Data &amp; AI Storage Solutions — IBM</div>
+      <h1>Data infrastructure for HPC and AI.</h1>
+      <p class="intro">
+        I design systems that put unstructured data to work—from edge clusters to global-scale
+        storage—and build open-source tools for benchmarking, cluster operations, and IBM Storage Scale.
       </p>
-      <div class="tags"><span class="tag">Perl</span><span class="tag">Python</span><span class="tag">Benchmarking</span></div>
-    </article>
+      <div class="actions">
+        <a class="button primary" href="#work">Explore selected work ↓</a>
+        <a class="button" href="https://www.linkedin.com/in/chieftroublemakingofficer">Connect on LinkedIn ↗</a>
+      </div>
+    </header>
 
-    <article class="card">
-      <h3><a href="https://github.com/cdmaestas/cap">CAP — Cluster Administration Package</a></h3>
-      <p>
-        A framework that integrates, configures, and manages HPC clusters by bundling common
-        cluster tools — pdsh, genders, Slurm, munge, conman, freeipmi, powerman — behind a
-        unified build and install system with RPM and Debian packaging.
-      </p>
-      <div class="tags"><span class="tag">Shell</span><span class="tag">Packaging</span><span class="tag">Cluster ops</span></div>
-    </article>
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">Selected work</div>
+          <h2 id="work-title">Tools built for real infrastructure.</h2>
+        </div>
+        <p class="section-copy">Personal open-source work focused on repeatability, safer operations, and useful data at cluster scale.</p>
+      </div>
 
-  </div>
+      <div class="featured-grid">
+        <article class="featured-card">
+          <span class="number">01 / BENCHMARK</span>
+          <h3><a href="https://github.com/cdmaestas/cbench">Cbench</a></h3>
+          <p>Automates the HPC benchmark lifecycle—from generating scheduler jobs to parsing output into structured results.</p>
+          <span class="metric">31 benchmarks · Perl + Python</span>
+        </article>
+        <article class="featured-card">
+          <span class="number">02 / INSTALL</span>
+          <h3><a href="https://github.com/cdmaestas/Scale-GUInstall">Scale GUInstall</a></h3>
+          <p>A guided web interface for installing, deploying, and upgrading Storage Scale clusters, with command previews before execution.</p>
+          <span class="metric">Signed RPM + DEB packages</span>
+        </article>
+        <article class="featured-card">
+          <span class="number">03 / VALIDATE</span>
+          <h3><a href="https://github.com/cdmaestas/StorageScale_NETWORK_READINESS">Network Readiness (KOET)</a></h3>
+          <p>Validates latency, throughput, and packet loss before a Storage Scale deployment goes near production.</p>
+          <span class="metric">Preflight for cluster networks</span>
+        </article>
+      </div>
 
-  <h2>IBM Storage Scale</h2>
-  <div class="grid">
+      <div class="section-heading" style="margin-top: 3.5rem">
+        <div><div class="section-label">More projects</div><h2>Cluster and data tooling.</h2></div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <h3><a href="https://github.com/cdmaestas/cap">CAP — Cluster Administration Package</a></h3>
+          <p>Integrates common HPC operations tools behind a unified build and install system with RPM and Debian packaging.</p>
+          <div class="tags"><span class="tag">Shell</span><span class="tag">Packaging</span><span class="tag">Cluster ops</span></div>
+        </article>
+        <article class="card">
+          <h3><a href="https://github.com/cdmaestas/ibm-storage-scale-mcp-server">Storage Scale MCP Server</a></h3>
+          <p>Exposes IBM Storage Scale REST APIs and CLIs as structured tools that language models can use with a live cluster.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Fork</span></div>
+        </article>
+        <article class="card">
+          <h3><a href="https://github.com/cdmaestas/ess_comprestimator">ESS Comprestimator</a></h3>
+          <p>Samples existing data to project how much capacity compression could reclaim before enabling it.</p>
+          <div class="tags"><span class="tag">TypeScript</span><span class="tag">Capacity</span><span class="tag">Fork</span></div>
+        </article>
+      </div>
+    </section>
 
-    <article class="card">
-      <h3><a href="https://github.com/cdmaestas/Scale-GUInstall">Scale GUInstall</a></h3>
-      <p>
-        A single-file web frontend for the IBM Storage Scale Installation Toolkit. Gives a guided,
-        form-driven interface for installing, deploying, and upgrading Scale clusters, with a
-        command preview before anything runs. Ships as signed RPM and DEB packages.
-      </p>
-      <div class="tags"><span class="tag">HTML</span><span class="tag">Flask</span><span class="tag">Installer</span></div>
-    </article>
+    <section class="section" id="publications" aria-labelledby="publications-title">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">Ideas in the open</div>
+          <h2 id="publications-title">Publications, talks &amp; writing.</h2>
+        </div>
+        <p class="section-copy">Selected work on storage architecture, AI data infrastructure, and operating systems at scale.</p>
+      </div>
+      <div class="pubs">
+        <div class="pub-group">
+          <h3>IBM Redbooks</h3>
+          <ul>
+            <li><a href="https://www.redbooks.ibm.com/abstracts/sg248602.html?Open">IBM Storage Scale: Working with Abstract Data</a><span class="meta">SG24-8602 · 2026</span></li>
+            <li><a href="https://www.redbooks.ibm.com/abstracts/redp5746.html?Open">Storage Scale System 6000 with NVIDIA DGX SuperPOD</a><span class="meta">REDP-5746 · 2026</span></li>
+            <li><a href="https://www.redbooks.ibm.com/abstracts/redp5729.html?Open">IBM Storage Scale System Introduction Guide</a><span class="meta">REDP-5729 · 2026</span></li>
+            <li><a href="https://www.redbooks.ibm.com/abstracts/redp5721.html?Open">IBM Storage Ceph Concepts and Architecture Guide</a><span class="meta">REDP-5721 · 2024</span></li>
+            <li><a href="https://www.redbooks.ibm.com/abstracts/redp4873.html?Open">Private, Public, and Hybrid Cloud Storage Solutions</a><span class="meta">REDP-4873 · 2018</span></li>
+          </ul>
+        </div>
+        <div class="pub-group">
+          <h3>Talks &amp; media</h3>
+          <ul>
+            <li><a href="https://mediacenter.ibm.com/channel/IBM+Redbooks/194592493">Working with Abstract Data — Author Session</a><span class="meta">IBM MediaCenter · 2026</span></li>
+            <li><a href="https://www.youtube.com/watch?v=0W-NHF5d9tQ">Deep Archive and Tape Robotics for HPC and AI</a><span class="meta">SC25 · 2025</span></li>
+            <li><a href="https://jeskell.com/optimize-your-data-lifecycle-join-our-digital-talk-series-with-ibm-storage-scale-tape/">Optimize Your Data Lifecycle</a><span class="meta">Jeskell · 2025</span></li>
+            <li><a href="https://www.youtube.com/watch?v=4s8Lq1UuKPo">Roundtable: High Performance Storage</a><span class="meta">2024</span></li>
+            <li><a href="https://siliconangle.com/2023/07/27/revamping-data-storage-to-harness-ai-for-an-information-supply-chain-ibmstoragesummit/">Revamping Data Storage to Harness AI</a><span class="meta">theCUBE · 2023</span></li>
+            <li><a href="https://techfieldday.com/appearance/ibm-storage-presents-at-storage-field-day-25/">IBM Storage at Storage Field Day 25</a><span class="meta">Tech Field Day · 2023</span></li>
+          </ul>
+        </div>
+        <div class="pub-group">
+          <h3>Writing</h3>
+          <ul>
+            <li><a href="https://community.ibm.com/community/user/blogs/christopher-maestas/2026/05/30/cas-for-scale-system-6000">CAS for Scale System 6000</a><span class="meta">IBM Community · 2026</span></li>
+            <li><a href="https://community.ibm.com/community/user/blogs/christopher-maestas/2026/02/06/hpc-ai-and-culture-my-trip-to-scahpc-asia-2026">HPC, AI and Culture: SCAHPC Asia 2026</a><span class="meta">IBM Community · 2026</span></li>
+            <li><a href="https://es.linkedin.com/posts/copernicuslacchile_ayer-recibimos-en-copernicuslac-chile-a-christopher-activity-7435316350891384833-QA1R">Visit to Copernicus LAC Chile</a><span class="meta">LinkedIn · 2026</span></li>
+            <li><a href="https://www.spectrumscaleug.org/presentations/">Spectrum Scale User Group presentations</a><span class="meta">Various sessions · 2018–2025</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <article class="card">
-      <h3><a href="https://github.com/cdmaestas/StorageScale_NETWORK_READINESS">Network Readiness (KOET)</a></h3>
-      <p>
-        Development fork of the IBM Storage Scale network readiness tool. Validates cluster
-        interconnect health — latency, throughput, and packet loss — before a Scale deployment
-        goes anywhere near production.
-      </p>
-      <div class="tags"><span class="tag">C</span><span class="tag">Networking</span><span class="tag">Validation</span></div>
-    </article>
-
-    <article class="card">
-      <h3><a href="https://github.com/cdmaestas/ibm-storage-scale-mcp-server">Storage Scale MCP Server</a></h3>
-      <p>
-        An MCP server built on the IBM Storage Scale REST APIs and CLIs, letting LLMs query and
-        interact with a live Scale cluster through a structured tool interface.
-      </p>
-      <div class="tags"><span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Fork</span></div>
-    </article>
-
-    <article class="card">
-      <h3><a href="https://github.com/cdmaestas/ess_comprestimator">ESS Comprestimator</a></h3>
-      <p>
-        IBM Storage Scale System compression estimator — samples existing data to project how much
-        capacity compression would actually reclaim before you commit to enabling it.
-      </p>
-      <div class="tags"><span class="tag">TypeScript</span><span class="tag">Capacity</span><span class="tag">Fork</span></div>
-    </article>
-
-  </div>
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="about">
+        <div><div class="section-label">About</div><h2 id="about-title">Systems at scale.</h2></div>
+        <div>
+          <p>For more than 25 years, I’ve architected enterprise IT systems across federal, commercial, and public sectors. My work spans HPC, hybrid and AI infrastructure, and unstructured data across file, object, and tape.</p>
+          <p>I work across cloud, on-premises, and edge environments on bare-metal, virtualized, and containerized platforms. The projects on this site are personal open-source work.</p>
+          <div class="actions">
+            <a class="button" href="https://github.com/cdmaestas">GitHub ↗</a>
+            <a class="button" href="https://www.linkedin.com/in/chieftroublemakingofficer">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    Built with GitHub Pages. Source at
-    <a href="https://github.com/cdmaestas/cdmaestas.github.io">cdmaestas/cdmaestas.github.io</a>.
-    The projects and views here are my own. They are not IBM products or services, and are
-    neither endorsed nor supported by IBM.
+    Built with GitHub Pages. Source at <a href="https://github.com/cdmaestas/cdmaestas.github.io">cdmaestas/cdmaestas.github.io</a>.
+    The projects and views here are my own and are neither endorsed nor supported by IBM.
   </footer>
-
 </div>
 </body>
 </html>
